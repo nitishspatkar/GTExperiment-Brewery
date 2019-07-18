@@ -1,6 +1,6 @@
 Class {
 	#name : #Fermentation,
-	#superclass : #BrewingProcess,
+	#superclass : #Object,
 	#instVars : [
 		'fermenter',
 		'boiledWort',

@@ -1,6 +1,6 @@
 Class {
 	#name : #Filtering,
-	#superclass : #BrewingProcess,
+	#superclass : #Object,
 	#instVars : [
 		'filter',
 		'unfilteredBeer',

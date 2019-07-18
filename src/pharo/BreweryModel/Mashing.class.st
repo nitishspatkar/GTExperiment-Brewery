@@ -1,6 +1,6 @@
 Class {
 	#name : #Mashing,
-	#superclass : #BrewingProcess,
+	#superclass : #Object,
 	#instVars : [
 		'mashTun',
 		'water',

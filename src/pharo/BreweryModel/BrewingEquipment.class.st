@@ -2,7 +2,7 @@ Class {
 	#name : #BrewingEquipment,
 	#superclass : #Object,
 	#instVars : [
-		'physicalProperties'
+		'capacity'
 	],
 	#category : #BreweryModel
 }

@@ -1,5 +1,5 @@
 Class {
 	#name : #Boiling,
-	#superclass : #BrewingProcess,
+	#superclass : #Object,
 	#category : #BreweryModel
 }
