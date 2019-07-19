@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #accessing }
-MashTun >> mash: graings with: water [
+MashTun >> mash: grains ofQuantity: aNumberInKg with: water ofQuantity: aNumberInLt for: duration atTemperature: aNumber [
 	| wort |
 	wort := Wort new.
 	^ wort

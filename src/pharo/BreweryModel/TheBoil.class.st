@@ -1,5 +1,5 @@
 Class {
-	#name : #Ethenol,
+	#name : #TheBoil,
 	#superclass : #Product,
 	#category : #BreweryModel
 }

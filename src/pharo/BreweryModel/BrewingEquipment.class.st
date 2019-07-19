@@ -6,3 +6,8 @@ Class {
 	],
 	#category : #BreweryModel
 }
+
+{ #category : #accessing }
+BrewingEquipment >> capacity: aNumber [
+	capacity := aNumber
+]
