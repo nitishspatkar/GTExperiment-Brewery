@@ -19,14 +19,33 @@ MashTun >> asElement [
 ]
 
 { #category : #accessing }
+MashTun >> changeColor [
+	| anElement |
+	anElement := self asElement.
+	anElement background: Color blue
+]
+
+{ #category : #accessing }
 MashTun >> changeColor: anElement [
 	anElement background: Color blue.
 ]
 
 { #category : #accessing }
+MashTun >> clickOn: mashTun [
+	| anElement |
+	anElement := self asElement when: BlClickEvent do: [ self inform:'click' ]
+]
+
+{ #category : #accessing }
+MashTun >> clickOnController: mashTun [
+	| anElement |
+	anElement := self asElement when: BlClickEvent do: [ self inform:'click' ]
+]
+
+{ #category : #accessing }
 MashTun >> decisionController [
 	state = 'finished'
-		ifTrue: [ self changeColor: self ]
+		ifTrue: [ self changeColor]
 		ifFalse: [self inform: 'Not enough consistency']
 ]
 
