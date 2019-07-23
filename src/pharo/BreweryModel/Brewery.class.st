@@ -9,11 +9,13 @@ Class {
 
 { #category : #accessing }
 Brewery >> asElement [
-	| mondrian |
-	mondrian := GtMondrian new.
-	mondrian layout grid horizontal cellSpacing: 10.
-	self equipments do: [:equipment | mondrian addChildren: equipment].
-	^ mondrian
+	| m |
+	m := GtMondrian new.
+	m nodes
+		stencil: [ :e | e asElement ];
+		with: equipments.
+	m layout tree.
+	^ m
 ]
 
 { #category : #accessing }
@@ -49,7 +51,7 @@ equipments := OrderedCollection new.
 ]
 
 { #category : #accessing }
-Brewery >> setUpEquipments [
+Brewery >> setUpEquipments [ <gtExample>
 	| brewery mashTun kettle |
 	brewery := self createABrewery.
 	kettle := Kettle new.
