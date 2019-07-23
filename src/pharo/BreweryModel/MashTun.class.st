@@ -7,16 +7,26 @@ Class {
 { #category : #accessing }
 MashTun >> asElement [
 	<gtExample>
-	^ super asElement
+	| anElement |
+	anElement := super asElement
 		background: Color blue veryMuchLighter;
 		border: (BlBorder paint: Color blue muchLighter width: 1) ;
-		when: BlClickEvent do: [ self startMashing ];
-		yourself
+		when: BlClickEvent do: [self changeColor:anElement.].
+		^ anElement
 ]
 
 { #category : #accessing }
 MashTun >> changeColor [
-^ super asElement background: Color blue; yourself
+	| anElement |
+	anElement := self asElement.
+	anElement background: Color blue.
+	self inform: 'Hello'.
+]
+
+{ #category : #accessing }
+MashTun >> changeColor: anElement [
+	anElement background: Color blue.
+	self inform: 'Mashing done!'
 ]
 
 { #category : #accessing }
