@@ -8,6 +8,15 @@ Class {
 }
 
 { #category : #accessing }
+Brewery >> asElement [
+	| mondrian |
+	mondrian := GtMondrian new.
+	mondrian layout grid horizontal cellSpacing: 10.
+	self equipments do: [:equipment | mondrian addChildren: equipment].
+	^ mondrian
+]
+
+{ #category : #accessing }
 Brewery >> breweryCreationExample [
 	<gtExample>
 	| brewery |
@@ -23,6 +32,15 @@ Brewery >> createABrewery [
 { #category : #accessing }
 Brewery >> equipments [
 	^ equipments
+]
+
+{ #category : #accessing }
+Brewery >> gtLiveFor: aView [
+	<gtView>
+	^ aView explicit
+		priority: 1;
+		title: 'Equipments';
+		stencil: [ self asElement ]
 ]
 
 { #category : #accessing }
