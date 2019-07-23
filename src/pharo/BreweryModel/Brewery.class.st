@@ -54,11 +54,11 @@ equipments := OrderedCollection new.
 Brewery >> setUpEquipments [ <gtExample>
 	| brewery mashTun kettle |
 	brewery := self createABrewery.
-	kettle := Kettle new.
 	mashTun := MashTun new.
+	kettle := Kettle new.
 	brewery equipments
 		addAll:
-			{kettle.
-			mashTun}.
+			{mashTun.
+			kettle}.
 	^ brewery
 ]
