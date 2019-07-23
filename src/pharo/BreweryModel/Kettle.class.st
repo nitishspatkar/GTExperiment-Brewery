@@ -5,8 +5,10 @@ Class {
 }
 
 { #category : #accessing }
-Kettle >> boil: wort with: hopes ofQuantity: aNumberInGm ofType: aName for: duration atTemperature: aNumber [
-	| theBoil |
-	theBoil := TheBoil new.
-	^ theBoil
+Kettle >> asElement [
+	<gtExample>
+	^ super asElement
+		background: Color brown veryMuchLighter;
+		border: (BlBorder paint: Color brown muchLighter width: 1) ;
+		yourself
 ]

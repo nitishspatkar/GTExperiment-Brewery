@@ -5,8 +5,10 @@ Class {
 }
 
 { #category : #accessing }
-MashTun >> mash: grains ofQuantity: aNumberInKg with: water ofQuantity: aNumberInLt for: duration atTemperature: aNumber [
-	| wort |
-	wort := Wort new.
-	^ wort
+MashTun >> asElement [
+	<gtExample>
+	^ super asElement
+		background: Color blue veryMuchLighter;
+		border: (BlBorder paint: Color blue muchLighter width: 1) ;
+		yourself
 ]
