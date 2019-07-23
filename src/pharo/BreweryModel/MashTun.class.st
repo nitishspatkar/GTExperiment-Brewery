@@ -1,6 +1,9 @@
 Class {
 	#name : #MashTun,
 	#superclass : #BrewingEquipment,
+	#instVars : [
+		'state'
+	],
 	#category : #BreweryModel
 }
 
@@ -10,39 +13,63 @@ MashTun >> asElement [
 	| anElement |
 	anElement := super asElement
 		background: Color blue veryMuchLighter;
-		border: (BlBorder paint: Color blue muchLighter width: 1);
-		when: BlClickEvent do: [self changeColor:anElement.].
+		border: (BlBorder paint: Color blue muchLighter width: 1).
+		"when: BlClickEvent do: [self changeColor:anElement.]."
 		^ anElement
 ]
 
 { #category : #accessing }
 MashTun >> changeColor: anElement [
 	anElement background: Color blue.
-	self inform: 'Mashing done!'
+]
+
+{ #category : #accessing }
+MashTun >> decisionController [
+	state = 'finished'
+		ifTrue: [ self changeColor: self ]
+		ifFalse: [self inform: 'Not enough consistency']
+]
+
+{ #category : #accessing }
+MashTun >> finishMashing [
+	state:= 'finished'
+]
+
+{ #category : #accessing }
+MashTun >> gtLiveFor: aView [
+	<gtView>
+	^ aView explicit
+		priority: 1;
+		title: 'MashTun';
+		stencil: [ self asElement ]
+]
+
+{ #category : #accessing }
+MashTun >> initialize [
+	super initialize.
+	state := 'start'
 ]
 
 { #category : #accessing }
 MashTun >> mash: grains with: water for: aDuration [
 	| wort |
 	wort := Wort new.
-	wort checkConsistency: aDuration
-	wort consistency == 5
-		ifTrue: [ self inform: 'consistency fine' ].
+	wort checkConsistency: aDuration.
+	wort consistency = 5
+		ifTrue: [ self finishMashing ].
 	^ wort
 ]
 
 { #category : #accessing }
 MashTun >> mashTunOperationExample [
-<gtExample>
-|mashTun grains water wort|
-
-mashTun := MashTun new.
-grains := Grain new.
-water := Water new.
-
-wort := mashTun mash: grains with: water for: 10.
-^ mashTun
-
+	<gtExample>
+	| mashTun grains water wort |
+	mashTun := MashTun new.
+	grains := Grain new.
+	water := Water new.
+	mashTun mash: grains with: water for: 31.
+	self decisionController.
+	^ mashTun
 ]
 
 { #category : #accessing }

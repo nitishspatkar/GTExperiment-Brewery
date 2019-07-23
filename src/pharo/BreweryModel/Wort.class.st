@@ -11,10 +11,16 @@ Class {
 Wort >> checkConsistency: aDuration [
 	aDuration > 30
 		ifTrue: [ consistency := 5 ]
-		ifFalse: [ consistency := 2.5 ]
+		ifFalse: [ consistency := 2 ].
+	^ consistency
 ]
 
 { #category : #accessing }
 Wort >> consistency [
 	^ consistency
+]
+
+{ #category : #accessing }
+Wort >> consistency: aNumber [
+	consistency := aNumber
 ]
