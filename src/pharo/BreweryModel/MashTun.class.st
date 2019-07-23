@@ -23,7 +23,7 @@ MashTun >> changeColor [
 MashTun >> mash: grains with: water for: aDuration [
 	| wort |
 	wort := Wort new.
-	self asElement background: Color blue; yourself.
+	self asElement background: Color blue.
 	self inform: 'mash: with:'.
 	^ wort
 ]
