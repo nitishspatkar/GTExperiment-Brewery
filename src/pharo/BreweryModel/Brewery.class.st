@@ -51,7 +51,8 @@ equipments := OrderedCollection new.
 ]
 
 { #category : #accessing }
-Brewery >> setUpEquipments [ <gtExample>
+Brewery >> setUpEquipments [
+	<gtExample>
 	| brewery mashTun kettle |
 	brewery := self createABrewery.
 	mashTun := MashTun new.
