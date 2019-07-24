@@ -14,8 +14,12 @@ MashTun >> asElement [
 	anElement := super asElement
 		background: Color blue veryMuchLighter;
 		border: (BlBorder paint: Color blue muchLighter width: 1);
-		when: BlClickEvent do: [self clickOnCntrl:anElement].
-		^ anElement
+		addChild: 
+		(BrButton new 
+		look: BrGlamorousButtonWithLabelLook; 
+		label: self;
+		action: [self startMashingCntrl. self clickOnCntrl: anElement ]).
+	^ anElement
 ]
 
 { #category : #accessing }
@@ -27,7 +31,7 @@ MashTun >> changeColor: anElement [
 MashTun >> clickOnCntrl: anElement [
 	"if mashing is complete then change the color"
 	state = 'finished'
-		ifTrue: [ anElement when: BlClickEvent do: [ self changeColor: anElement ] ]
+		ifTrue: [ self changeColor: anElement ]
 		ifFalse: [self inform: 'Not enough consistency'].
 	^ anElement
 ]
@@ -72,4 +76,9 @@ MashTun >> mashTunOperationExample [
 	mashTun mash: grains with: water for: 31.
 	"self decisionController."
 	^ mashTun
+]
+
+{ #category : #accessing }
+MashTun >> startMashingCntrl [
+	self mash: 'grains' with: 'water' for: 11.
 ]
