@@ -14,11 +14,13 @@ MashTun >> asElement [
 	anElement := super asElement
 		background: Color blue veryMuchLighter;
 		border: (BlBorder paint: Color blue muchLighter width: 1);
-		addChild: 
-		(BrButton new 
-		look: BrGlamorousButtonWithLabelLook; 
-		label: self;
-		action: [self startMashingCntrl. self clickOnCntrl: anElement ]).
+		addChild:
+			(BrButton new
+				look: BrGlamorousButtonWithLabelLook;
+				label: 'Start mashing';
+				action: [ self startMashingCntrl.
+					self clickOnCntrl: anElement ]);
+		addChild: (self getDropDown).
 	^ anElement
 ]
 
@@ -39,6 +41,50 @@ MashTun >> clickOnCntrl: anElement [
 { #category : #accessing }
 MashTun >> finishMashing [
 	state:= 'finished'
+]
+
+{ #category : #accessing }
+MashTun >> getDropDown [
+	| dropdown |
+	dropdown := BrDropdown new.
+	^ dropdown
+		look: BrGlamorousDropdownLook;
+		layout: BlLinearLayout horizontal;
+		constraintsDo: [ :c | 
+			c horizontal fitContent.
+			c vertical fitContent ];
+		toggle: [ BrButton new
+				look: BrGlamorousButtonWithIconLook;
+				icon: BrGlamorousIcons add asElement;
+				yourself ];
+		popup: [ | editor button |
+			editor := BrEditor new
+				look: BrGlamorousRegularEditorLook new;
+				geometry: (BlRectangle cornerRadius: 4);
+				border: (BlBorder paint: BrGlamorousColors editorBorderColor width: 1);
+				hExact: 100;
+				vMatchParent;
+				padding: (BlInsets all: 3);
+				constraintsDo: [ :c | 
+					c horizontal matchParent.
+					c vertical fitContent ];
+				yourself.
+			button := BrButton new
+				look: BrGlamorousButtonWithIconLook;
+				margin: (BlInsets left: 10);
+				icon: BrGlamorousIcons accept asElement;
+				action: [ dropdown collapse ];
+				yourself.
+			BlElement new
+				layout: BlLinearLayout horizontal;
+				padding: (BlInsets all: 10);
+				constraintsDo: [ :c | 
+					c horizontal fitContent.
+					c vertical fitContent ];
+				addChild: editor;
+				addChild: button;
+				yourself ];
+		yourself
 ]
 
 { #category : #accessing }
@@ -80,5 +126,51 @@ MashTun >> mashTunOperationExample [
 
 { #category : #accessing }
 MashTun >> startMashingCntrl [
-	self mash: 'grains' with: 'water' for: 11.
+	self mash: 'grains' with: 'water' for: 31.
+]
+
+{ #category : #accessing }
+MashTun >> testExample [
+	<gtExample>
+	| dropdown |
+	dropdown := BrDropdown new.
+	^ dropdown
+		look: BrGlamorousDropdownLook;
+		layout: BlLinearLayout horizontal;
+		constraintsDo: [ :c | 
+			c horizontal fitContent.
+			c vertical fitContent ];
+		toggle: [ BrButton new
+				look: BrGlamorousButtonWithIconLook;
+				icon: BrGlamorousIcons add asElement;
+				yourself ];
+		popup: [ | editor button |
+			editor := BrEditor new
+				look: BrGlamorousRegularEditorLook new;
+				geometry: (BlRectangle cornerRadius: 4);
+				border: (BlBorder paint: BrGlamorousColors editorBorderColor width: 1);
+				hExact: 100;
+				vMatchParent;
+				padding: (BlInsets all: 3);
+				constraintsDo: [ :c | 
+					c horizontal matchParent.
+					c vertical fitContent ];
+				yourself.
+			button := BrButton new
+				look: BrGlamorousButtonWithIconLook;
+				margin: (BlInsets left: 10);
+				icon: BrGlamorousIcons accept asElement;
+				action: [ dropdown collapse.
+					];
+				yourself.
+			BlElement new
+				layout: BlLinearLayout horizontal;
+				padding: (BlInsets all: 10);
+				constraintsDo: [ :c | 
+					c horizontal fitContent.
+					c vertical fitContent ];
+				addChild: editor;
+				addChild: button;
+				yourself ];
+		yourself
 ]
