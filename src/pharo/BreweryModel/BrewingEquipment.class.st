@@ -12,7 +12,7 @@ BrewingEquipment >> asElement [
 	<gtExample>
 	^ BlElement new
 		geometry: BlRectangle new;
-		size: 200 @ 100;
+		size: 350 @ 100;
 		background: Color transparent;
 		border: (BlBorder paint: Color black width: 1);
 		yourself

@@ -10,17 +10,25 @@ Class {
 { #category : #accessing }
 MashTun >> asElement [
 	<gtExample>
-	| anElement |
+	| anElement editor1 editor2 |
+	editor1 := self newEditor text: 'Enter grain type'.
+	editor2 := self newEditor text: 'Enter duration in minutes'.
 	anElement := super asElement
+		layout: BlLinearLayout horizontal;
 		background: Color blue veryMuchLighter;
 		border: (BlBorder paint: Color blue muchLighter width: 1);
+		addChild: editor1;
+		addChild: editor2;
 		addChild:
 			(BrButton new
 				look: BrGlamorousButtonWithLabelLook;
 				label: 'Start mashing';
-				action: [ self startMashingCntrl.
-					self clickOnCntrl: anElement ]);
-		addChild: (self getDropDown).
+				action: [ | duration grainType|
+					grainType := editor1 text asString .
+					duration := editor2 text asString asNumber.
+					[ (duration / 10) seconds wait.
+					self cntrlStartMashing: grainType for: duration.
+					self clickOnCntrl: anElement ] fork ]).
 	^ anElement
 ]
 
@@ -36,6 +44,11 @@ MashTun >> clickOnCntrl: anElement [
 		ifTrue: [ self changeColor: anElement ]
 		ifFalse: [self inform: 'Not enough consistency'].
 	^ anElement
+]
+
+{ #category : #accessing }
+MashTun >> cntrlStartMashing: grainType  for: aNumber [ 
+	self mash: grainType with: 'water' for: aNumber.
 ]
 
 { #category : #accessing }
@@ -125,8 +138,21 @@ MashTun >> mashTunOperationExample [
 ]
 
 { #category : #accessing }
-MashTun >> startMashingCntrl [
-	self mash: 'grains' with: 'water' for: 31.
+MashTun >> newEditor [
+	^ BrEditor new
+		look: BrGlamorousRegularEditorLook new;
+		geometry: (BlRectangle cornerRadius: 4);
+		background: Color white;
+		border: (BlBorder paint: BrGlamorousColors editorBorderColor width: 1);
+		padding: (BlInsets all: 3);
+		hExact: 100;
+		vFitContent;
+		yourself
+]
+
+{ #category : #accessing }
+MashTun >> startMashingCntrl: aNumber [
+	self mash: 'grains' with: 'water' for: aNumber.
 ]
 
 { #category : #accessing }
