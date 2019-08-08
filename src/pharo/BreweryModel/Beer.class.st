@@ -2,39 +2,25 @@ Class {
 	#name : #Beer,
 	#superclass : #Product,
 	#instVars : [
-		'color',
-		'alcoholContent',
-		'taste'
+		'TFG'
 	],
 	#category : #BreweryModel
 }
 
 { #category : #accessing }
-Beer >> alcoholContent [
-^ alcoholContent
+Beer >> TFG [
+^ TFG
 ]
 
 { #category : #accessing }
-Beer >> alcoholContent: aNumber [
-alcoholContent := aNumber
+Beer >> TFG: aNUmber [
+	TFG := aNUmber
 ]
 
 { #category : #accessing }
-Beer >> color [
-^ color
-]
-
-{ #category : #accessing }
-Beer >> color: aColor [
-color := aColor
-]
-
-{ #category : #accessing }
-Beer >> taste [
-^ taste
-]
-
-{ #category : #accessing }
-Beer >> taste: aString [
-taste := aString
+Beer >> checkTFG: aDuration [
+	aDuration > 7
+		ifTrue: [ TFG := 1.01 ]
+		ifFalse: [ TFG := 1.03 ].
+	^ TFG
 ]

@@ -47,8 +47,8 @@ MashTun >> clickOnCntrl: anElement [
 ]
 
 { #category : #accessing }
-MashTun >> cntrlStartMashing: grainType  for: aNumber [ 
-	self mash: grainType with: 'water' for: aNumber.
+MashTun >> cntrlStartMashing: grainType for: aNumber [
+	self mash: grainType with: 'water' for: aNumber
 ]
 
 { #category : #accessing }
@@ -151,8 +151,8 @@ MashTun >> newEditor [
 ]
 
 { #category : #accessing }
-MashTun >> startMashingCntrl: aNumber [
-	self mash: 'grains' with: 'water' for: aNumber.
+MashTun >> state: aString [
+	state := aString
 ]
 
 { #category : #accessing }

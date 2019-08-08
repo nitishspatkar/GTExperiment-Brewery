@@ -9,12 +9,12 @@ Class {
 
 { #category : #accessing }
 Fermenter >> add: yeast to: theBoil andWaitFor: aDuration [
-	| rawBeer |
-	rawBeer := RawBeer new.
-	rawBeer checkTFG: aDuration.
-	rawBeer TFG = 1.01
+	| beer |
+	beer := Beer new.
+	beer checkTFG: aDuration.
+	beer TFG = 1.01
 		ifTrue: [ self finishFermenting ].
-	^ rawBeer
+	^ beer
 ]
 
 { #category : #accessing }
@@ -83,4 +83,9 @@ Fermenter >> newEditor [
 		hExact: 100;
 		vFitContent;
 		yourself
+]
+
+{ #category : #accessing }
+Fermenter >> state: aString [
+	state := aString
 ]

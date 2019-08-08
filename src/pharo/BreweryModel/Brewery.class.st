@@ -2,7 +2,8 @@ Class {
 	#name : #Brewery,
 	#superclass : #Object,
 	#instVars : [
-		'equipments'
+		'equipments',
+		'brewMaster'
 	],
 	#category : #BreweryModel
 }
@@ -19,6 +20,16 @@ Brewery >> asElement [
 ]
 
 { #category : #accessing }
+Brewery >> brewMaster [
+	^ brewMaster
+]
+
+{ #category : #accessing }
+Brewery >> brewMaster: master [
+	brewMaster := master
+]
+
+{ #category : #accessing }
 Brewery >> breweryCreationExample [
 	<gtExample>
 	| brewery |
@@ -27,8 +38,13 @@ Brewery >> breweryCreationExample [
 ]
 
 { #category : #accessing }
-Brewery >> createABrewery [
-	^ Brewery new
+Brewery >> createABreweryAndBrewMaster [
+	| brewery master |
+	brewery := Brewery new.
+	master := BrewMaster new.
+	brewery brewMaster: master.
+	^ {brewery.
+	master}
 ]
 
 { #category : #accessing }
@@ -53,11 +69,12 @@ equipments := OrderedCollection new.
 { #category : #accessing }
 Brewery >> setUpEquipments [
 	<gtExample>
-	| brewery mashTun kettle fermenter |
-	brewery := self createABrewery.
-	mashTun := MashTun new.
-	kettle := Kettle new.
-	fermenter := Fermenter new.
+	| brewery master mashTun kettle fermenter |
+	brewery := self createABreweryAndBrewMaster at: 1.
+	master := self createABreweryAndBrewMaster at: 2.
+	mashTun := master setupEquipments at: 1.
+	kettle := master setupEquipments at: 2.
+	fermenter := master setupEquipments at: 3.
 	brewery equipments
 		addAll:
 			{mashTun.
