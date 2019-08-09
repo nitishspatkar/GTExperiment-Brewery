@@ -12,7 +12,6 @@ Grain >> asElement [
 <gtExample>
 	^ BlElement new
 		geometry: BlCircle new;
-		size: 350 @ 100;
 		background: Color transparent;
 		border: (BlBorder paint: Color black width: 1);
 		yourself
