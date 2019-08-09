@@ -2,10 +2,24 @@ Class {
 	#name : #MashTun,
 	#superclass : #BrewingEquipment,
 	#instVars : [
-		'state'
+		'state',
+		'wort'
 	],
 	#category : #BreweryModel
 }
+
+{ #category : #accessing }
+MashTun >> addGrains: grainType [
+	self assert: [ wort isNotNil ] and: [ wort contains: #water ].
+	wort addGrains: grainType
+]
+
+{ #category : #accessing }
+MashTun >> addWater: water [
+	self assert: [ wort isNil ].
+	wort := Wort new.
+	wort addWater: water
+]
 
 { #category : #accessing }
 MashTun >> asElement [
@@ -38,6 +52,15 @@ MashTun >> changeColor: anElement [
 ]
 
 { #category : #accessing }
+MashTun >> checkWortConsistency [
+	self
+		assert: [ wort isNotNil ]
+		and: [ wort contains: #water ]
+		and: [ wort contains: #grains ].
+	^ wort consistency
+]
+
+{ #category : #accessing }
 MashTun >> clickOnCntrl: anElement [
 	"if mashing is complete then change the color"
 	state = 'finished'
@@ -53,51 +76,9 @@ MashTun >> cntrlStartMashing: grainType for: aNumber [
 
 { #category : #accessing }
 MashTun >> finishMashing [
-	state:= 'finished'
-]
-
-{ #category : #accessing }
-MashTun >> getDropDown [
-	| dropdown |
-	dropdown := BrDropdown new.
-	^ dropdown
-		look: BrGlamorousDropdownLook;
-		layout: BlLinearLayout horizontal;
-		constraintsDo: [ :c | 
-			c horizontal fitContent.
-			c vertical fitContent ];
-		toggle: [ BrButton new
-				look: BrGlamorousButtonWithIconLook;
-				icon: BrGlamorousIcons add asElement;
-				yourself ];
-		popup: [ | editor button |
-			editor := BrEditor new
-				look: BrGlamorousRegularEditorLook new;
-				geometry: (BlRectangle cornerRadius: 4);
-				border: (BlBorder paint: BrGlamorousColors editorBorderColor width: 1);
-				hExact: 100;
-				vMatchParent;
-				padding: (BlInsets all: 3);
-				constraintsDo: [ :c | 
-					c horizontal matchParent.
-					c vertical fitContent ];
-				yourself.
-			button := BrButton new
-				look: BrGlamorousButtonWithIconLook;
-				margin: (BlInsets left: 10);
-				icon: BrGlamorousIcons accept asElement;
-				action: [ dropdown collapse ];
-				yourself.
-			BlElement new
-				layout: BlLinearLayout horizontal;
-				padding: (BlInsets all: 10);
-				constraintsDo: [ :c | 
-					c horizontal fitContent.
-					c vertical fitContent ];
-				addChild: editor;
-				addChild: button;
-				yourself ];
-		yourself
+	state := 'finished'.
+	^ [ wort ]
+		ensure: [ wort := nil ]
 ]
 
 { #category : #accessing }
@@ -116,16 +97,6 @@ MashTun >> initialize [
 ]
 
 { #category : #accessing }
-MashTun >> mash: grains with: water for: aDuration [
-	| wort |
-	wort := Wort new.
-	wort checkConsistency: aDuration.
-	wort consistency = 5
-		ifTrue: [ self finishMashing ].
-	^ wort
-]
-
-{ #category : #accessing }
 MashTun >> mashTunOperationExample [
 	<gtExample>
 	| mashTun grains water wort |
@@ -135,6 +106,15 @@ MashTun >> mashTunOperationExample [
 	mashTun mash: grains with: water for: 31.
 	"self decisionController."
 	^ mashTun
+]
+
+{ #category : #accessing }
+MashTun >> mashWortForDuration: aDuration [
+	self
+		assert: [ wort isNotNil ]
+		and: [ wort contains: #water ]
+		and: [ wort contains: #grains ] wort
+		mashWortForDuration: aDuration
 ]
 
 { #category : #accessing }

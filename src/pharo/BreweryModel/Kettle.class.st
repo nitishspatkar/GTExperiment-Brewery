@@ -118,11 +118,6 @@ Kettle >> newEditor [
 ]
 
 { #category : #accessing }
-Kettle >> obtainWort [
-
-]
-
-{ #category : #accessing }
 Kettle >> removeBoil [
 	^ [ boil ]
 		ensure: [ boil := nil ]
