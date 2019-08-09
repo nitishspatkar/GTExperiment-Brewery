@@ -65,7 +65,7 @@ Brewery >> gtLiveFor: aView [
 
 { #category : #accessing }
 Brewery >> initialize [
-	| malt1 malt2 hops1 hops2 |
+	| malt1 malt2 hops1 hops2 yeast1 yeast2 |
 	super initialize.
 	equipments := OrderedCollection new.
 	inventory := OrderedCollection new.
@@ -73,12 +73,16 @@ Brewery >> initialize [
 	malt2 := ViennaMalt new quantity: 1.
 	hops1 := MagnumHop new quantity: 2.
 	hops2 := ChinookHop new quantity: 1.
+	yeast1 := CoopersYeast new quantity: 2.
+	yeast2 := FermentisYeast new quantity: 1.
 	inventory
 		addAll:
 			{malt1.
 			malt2.
 			hops1.
-			hops2}
+			hops2.
+			yeast1.
+			yeast2}
 ]
 
 { #category : #accessing }
