@@ -20,15 +20,17 @@ Fermenter >> add: yeast to: theBoil andWaitFor: aDuration [
 { #category : #accessing }
 Fermenter >> asElement [
 	<gtExample>
-	| anElement editor1 editor2 |
+	| anElement editor1 editor2 calculatedSize|
+	calculatedSize := self cntrlGetCapacity.
 	editor1 := self newEditor text: 'Enter  yeast type'.
 	editor2 := self newEditor text: 'Enter duration'.
 	anElement := super asElement
+		size: calculatedSize;
 		layout: BlLinearLayout horizontal;
 		background: Color gray veryMuchLighter;
 		border: (BlBorder paint: Color gray muchLighter width: 1);
-		addChild: editor1;
-		addChild: editor2;
+		"addChild: editor1;
+		addChild: editor2;"
 		addChild:
 			(BrButton new
 				look: BrGlamorousButtonWithLabelLook;

@@ -22,3 +22,11 @@ BrewingEquipment >> asElement [
 BrewingEquipment >> capacity: aNumber [
 	capacity := aNumber
 ]
+
+{ #category : #accessing }
+BrewingEquipment >> cntrlGetCapacity [
+	capacity = 20
+		ifTrue: [ ^ 360 @ 100 ].
+	capacity = 50
+		ifTrue: [ ^ 700 @ 200 ]
+]

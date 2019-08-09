@@ -31,11 +31,13 @@ MashTun >> addWater: water ofVolume: aVolume [
 { #category : #accessing }
 MashTun >> asElement [
 	<gtExample>
-	| anElement editor1 editor2 |
+	| anElement editor1 editor2 calculatedSize|
+	calculatedSize:= self cntrlGetCapacity.
 	editor1 := self newEditor text: 'Enter grain type'.
 	editor2 := self newEditor text: 'Enter duration in minutes'.
 	anElement := super asElement
 		layout: BlLinearLayout horizontal;
+		size: calculatedSize;
 		background: Color blue veryMuchLighter;
 		border: (BlBorder paint: Color blue muchLighter width: 1);
 		"addChild: editor1;

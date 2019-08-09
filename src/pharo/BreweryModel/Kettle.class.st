@@ -24,22 +24,23 @@ boil addWort: aWort.
 { #category : #accessing }
 Kettle >> asElement [
 	<gtExample>
-	| anElement editor1 editor2 editor3 editor4 editor5 |
+	| anElement editor1 editor2 editor3 editor4 editor5 calculatedSize|
+	calculatedSize := self cntrlGetCapacity.
 	editor1 := self newEditor text: 'Enter Hopes 1'.
 	editor2 := self newEditor text: 'Enter at duration'.
 	editor3 := self newEditor text: 'Enter Hopes 2'.
 	editor4 := self newEditor text: 'Enter at duration'.
 	editor5 := self newEditor text: 'Enter remaining duration'.
 	anElement := super asElement
-		size: 600@200;
+		size: calculatedSize;
 		layout: BlLinearLayout horizontal;
 		background: Color brown veryMuchLighter;
 		border: (BlBorder paint: Color brown muchLighter width: 1);
-		addChild: editor1;
+		"addChild: editor1;
 		addChild: editor2;
 		addChild: editor3;
 		addChild: editor4;
-		addChild: editor5;
+		addChild: editor5;"
 		addChild:
 			(BrButton new
 				look: BrGlamorousButtonWithLabelLook;

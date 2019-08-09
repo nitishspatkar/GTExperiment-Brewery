@@ -87,7 +87,7 @@ Brewery >> initialize [
 	mashTun1 := MashTun new capacity: 20.
 	mashTun2 := MashTun new capacity: 50.
 	kettle1 := Kettle new capacity: 20.
-	kettle2 := Kettle new capacity: 20.
+	kettle2 := Kettle new capacity: 50.
 	fermenter1 := Fermenter new capacity: 20.
 	fermenter2 := Fermenter new capacity: 50.
 	
@@ -115,14 +115,15 @@ Brewery >> inventory [
 { #category : #accessing }
 Brewery >> setUpEquipments [
 	<gtExample>
-	| brewery mashTun kettle |
+	| brewery mashTun kettle fermenter |
 	brewery := self createBrewery.
 	mashTun := inventory at: 7.
 	kettle := inventory at: 9.
-	
+	fermenter := inventory at: 11.
 	brewery equipments
 		addAll:
 			{mashTun.
-			kettle}.
+			kettle.
+			fermenter}.
 	^ brewery
 ]
