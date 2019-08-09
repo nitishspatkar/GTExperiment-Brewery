@@ -15,8 +15,7 @@ Brewery >> asElement [
 	m := GtMondrian new.
 	m nodes
 		stencil: [ :e | e asElement ];
-		with: equipments;
-		with: inventory.
+		with: equipments.
 	m layout tree.
 	^ m
 ]
@@ -44,7 +43,9 @@ Brewery >> brewMaster: master [
 
 { #category : #accessing }
 Brewery >> createBrewery [
-	^ Brewery new
+	| brewery |
+	brewery := Brewery new.
+	^ brewery
 ]
 
 { #category : #accessing }
@@ -86,7 +87,7 @@ Brewery >> initialize [
 	mashTun1 := MashTun new capacity: 20.
 	mashTun2 := MashTun new capacity: 50.
 	kettle1 := Kettle new capacity: 20.
-	kettle1 := Kettle new capacity: 20.
+	kettle2 := Kettle new capacity: 20.
 	fermenter1 := Fermenter new capacity: 20.
 	fermenter2 := Fermenter new capacity: 50.
 	
@@ -118,7 +119,8 @@ Brewery >> setUpEquipments [
 	brewery := self createBrewery.
 	mashTun := inventory at: 7.
 	kettle := inventory at: 9.
-	equipments
+	
+	brewery equipments
 		addAll:
 			{mashTun.
 			kettle}.
