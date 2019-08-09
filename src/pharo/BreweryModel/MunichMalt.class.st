@@ -8,7 +8,7 @@ Class {
 MunichMalt >> asElement [
 	<gtExample>
 	| anElement|
-	anElement := super asElement background: Color lightBrown.
+	anElement := super asElement background: Color brown.
 	^ anElement
 ]
 

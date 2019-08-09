@@ -8,12 +8,12 @@ Class {
 ViennaMalt >> asElement [
 	<gtExample>
 	| anElement|
-	anElement := super asElement background: Color brown.
+	anElement := super asElement background: Color brown muchLighter.
 	^ anElement
 ]
 
 { #category : #accessing }
 ViennaMalt >> initialize [
 	super initialize.
-	color := Color Brown
+	color := Color brown
 ]

@@ -38,8 +38,8 @@ MashTun >> asElement [
 		layout: BlLinearLayout horizontal;
 		background: Color blue veryMuchLighter;
 		border: (BlBorder paint: Color blue muchLighter width: 1);
-		addChild: editor1;
-		addChild: editor2;
+		"addChild: editor1;
+		addChild: editor2;"
 		addChild:
 			(BrButton new
 				look: BrGlamorousButtonWithLabelLook;

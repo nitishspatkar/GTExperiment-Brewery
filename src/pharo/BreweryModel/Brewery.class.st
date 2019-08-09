@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'equipments',
-		'brewMaster'
+		'brewMaster',
+		'inventory'
 	],
 	#category : #BreweryModel
 }
@@ -14,7 +15,8 @@ Brewery >> asElement [
 	m := GtMondrian new.
 	m nodes
 		stencil: [ :e | e asElement ];
-		with: equipments.
+		with: equipments;
+		with: inventory.
 	m layout tree.
 	^ m
 ]
@@ -62,8 +64,26 @@ Brewery >> gtLiveFor: aView [
 ]
 
 { #category : #accessing }
-Brewery >> initialize [ super initialize.
-equipments := OrderedCollection new.
+Brewery >> initialize [
+	| malt1 malt2 hops1 hops2 |
+	super initialize.
+	equipments := OrderedCollection new.
+	inventory := OrderedCollection new.
+	malt1 := MunichMalt new quantity: 2.
+	malt2 := ViennaMalt new quantity: 1.
+	hops1 := MagnumHop new quantity: 2.
+	hops2 := ChinookHop new quantity: 1.
+	inventory
+		addAll:
+			{malt1.
+			malt2.
+			hops1.
+			hops2}
+]
+
+{ #category : #accessing }
+Brewery >> inventory [
+	^ inventory
 ]
 
 { #category : #accessing }
