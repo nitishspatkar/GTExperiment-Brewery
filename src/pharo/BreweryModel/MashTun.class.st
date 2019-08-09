@@ -22,6 +22,13 @@ MashTun >> addWater: water [
 ]
 
 { #category : #accessing }
+MashTun >> addWater: water ofVolume: aVolume [
+	self assert: [ wort isNil ].
+	wort := Wort new.
+	wort addWater: water ofVolume: aVolume
+]
+
+{ #category : #accessing }
 MashTun >> asElement [
 	<gtExample>
 	| anElement editor1 editor2 |
