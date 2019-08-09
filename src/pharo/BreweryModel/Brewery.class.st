@@ -22,6 +22,17 @@ Brewery >> asElement [
 ]
 
 { #category : #accessing }
+Brewery >> asInventory [
+| m |
+	m := GtMondrian new.
+	m nodes
+		stencil: [ :e | e asElement ];
+		with: inventory.
+	m layout tree.
+	^ m
+]
+
+{ #category : #accessing }
 Brewery >> brewMaster [
 	^ brewMaster
 ]
@@ -32,21 +43,39 @@ Brewery >> brewMaster: master [
 ]
 
 { #category : #accessing }
-Brewery >> breweryCreationExample [
-	<gtExample>
-	| brewery |
+Brewery >> createBrewery [
+	| brewery malt1 malt2 hops1 hops2 yeast1 yeast2 mashTun1 mashTun2 kettle1 kettle2 fermenter1 fermenter2 |
+	super initialize.
 	brewery := Brewery new.
+	equipments := OrderedCollection new.
+	inventory := OrderedCollection new.
+	malt1 := MunichMalt new quantity: 2.
+	malt2 := ViennaMalt new quantity: 1.
+	hops1 := MagnumHop new quantity: 2.
+	hops2 := ChinookHop new quantity: 1.
+	yeast1 := CoopersYeast new quantity: 2.
+	yeast2 := FermentisYeast new quantity: 1.
+	mashTun1 := MashTun new capacity: 20.
+	mashTun2 := MashTun new capacity: 50.
+	kettle1 := Kettle new capacity: 20.
+	kettle1 := Kettle new capacity: 20.
+	fermenter1 := Fermenter new capacity: 20.
+	fermenter2 := Fermenter new capacity: 50.
+	inventory
+		addAll:
+			{malt1.
+			malt2.
+			hops1.
+			hops2.
+			yeast1.
+			yeast2.
+			mashTun1.
+			mashTun2.
+			kettle1.
+			kettle2.
+			fermenter1.
+			fermenter2}.
 	^ brewery
-]
-
-{ #category : #accessing }
-Brewery >> createABreweryAndBrewMaster [
-	| brewery master |
-	brewery := Brewery new.
-	master := BrewMaster new.
-	brewery brewMaster: master.
-	^ {brewery.
-	master}
 ]
 
 { #category : #accessing }
@@ -59,30 +88,17 @@ Brewery >> gtLiveFor: aView [
 	<gtView>
 	^ aView explicit
 		priority: 1;
-		title: 'Equipments';
+		title: 'Brewery';
 		stencil: [ self asElement ]
 ]
 
 { #category : #accessing }
-Brewery >> initialize [
-	| malt1 malt2 hops1 hops2 yeast1 yeast2 |
-	super initialize.
-	equipments := OrderedCollection new.
-	inventory := OrderedCollection new.
-	malt1 := MunichMalt new quantity: 2.
-	malt2 := ViennaMalt new quantity: 1.
-	hops1 := MagnumHop new quantity: 2.
-	hops2 := ChinookHop new quantity: 1.
-	yeast1 := CoopersYeast new quantity: 2.
-	yeast2 := FermentisYeast new quantity: 1.
-	inventory
-		addAll:
-			{malt1.
-			malt2.
-			hops1.
-			hops2.
-			yeast1.
-			yeast2}
+Brewery >> gtLiveForInventory: aView [
+	<gtView>
+	^ aView explicit
+		priority: 1;
+		title: 'Inventory';
+		stencil: [ self asInventory ]
 ]
 
 { #category : #accessing }
@@ -93,16 +109,7 @@ Brewery >> inventory [
 { #category : #accessing }
 Brewery >> setUpEquipments [
 	<gtExample>
-	| brewery master mashTun kettle fermenter |
-	brewery := self createABreweryAndBrewMaster at: 1.
-	master := self createABreweryAndBrewMaster at: 2.
-	mashTun := master setupEquipments at: 1.
-	kettle := master setupEquipments at: 2.
-	fermenter := master setupEquipments at: 3.
-	brewery equipments
-		addAll:
-			{mashTun.
-			kettle.
-			fermenter}.
-	^ brewery
+	| brewery mashTun kettle fermenter |
+	brewery:= self createBrewery.
+	brewery inventory at:1.
 ]
