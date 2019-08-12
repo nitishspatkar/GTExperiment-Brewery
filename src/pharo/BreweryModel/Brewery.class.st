@@ -63,15 +63,11 @@ Brewery >> createBrewery [
 
 { #category : #accessing }
 Brewery >> createRecipe [
+	<gtExample>
 	| recipe brewery |
 	brewery := self setUpEquipments.
-	recipe := recipe new.
-	recipe ingredients
-		addAll:
-			{(inventory at: 1).
-			(inventory at: 3).
-			(inventory at: 5)}.
-	ingredients:= recipe ingredients.
+	
+	^ brewery
 ]
 
 { #category : #accessing }
@@ -117,6 +113,7 @@ Brewery >> initialize [
 	super initialize.
 	equipments := OrderedCollection new.
 	inventory := OrderedCollection new.
+	ingredients:= OrderedCollection new.
 	
 	malt1 := MunichMalt new quantity: 2.
 	malt2 := ViennaMalt new quantity: 1.
@@ -150,6 +147,25 @@ Brewery >> initialize [
 { #category : #accessing }
 Brewery >> inventory [
 	^ inventory
+]
+
+{ #category : #accessing }
+Brewery >> selectIngredients [
+	<gtExample>
+	| brewery |
+	brewery := self setUpEquipments.
+	self assert: [ inventory isNotEmpty ].
+	brewery ingredients
+		addAll:
+			{(inventory at: 1).
+			(inventory at: 3).
+			(inventory at: 4).
+			(inventory at: 5)}.
+	brewery inventory removeAt: 1.
+	brewery inventory removeAt: 3.
+	brewery inventory removeAt: 4.
+	brewery inventory removeAt: 5.
+	^ brewery
 ]
 
 { #category : #accessing }
