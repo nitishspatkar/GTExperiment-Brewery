@@ -20,7 +20,8 @@ Grain >> asElement [
 
 { #category : #accessing }
 Grain >> cntrlAddGrains: grains [
-	self inform: grains color asString
+	self inform: grains asString.
+	^ grains
 ]
 
 { #category : #accessing }
