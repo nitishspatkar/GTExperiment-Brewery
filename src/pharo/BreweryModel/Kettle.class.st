@@ -10,15 +10,15 @@ Class {
 
 { #category : #accessing }
 Kettle >> addHops: someHops [
-self assert: [boil  isNotNil].
-boil addHops: someHops
+	self assert: [ boil isNotNil ].
+	boil addHops: someHops
 ]
 
 { #category : #accessing }
 Kettle >> addWort: aWort [
-self assert: [boil  isNil and: [state = #start]].
-boil := TheBoil new.
-boil addWort: aWort.
+	self assert: [ boil isNil and: [ state = #start ] ].
+	boil := TheBoil new.
+	boil addWort: aWort
 ]
 
 { #category : #accessing }
@@ -58,20 +58,9 @@ Kettle >> asElement [
 ]
 
 { #category : #accessing }
-Kettle >> boil: hopes1 at: duration1 and: hopes2 at: duration2 forAnother: remainingDuration in: wort [
-	| theBoil totalDuration |
-	theBoil := TheBoil new.
-	totalDuration := duration1 + duration2 + remainingDuration.
-	theBoil checkTOG: totalDuration.
-	theBoil TOG <= 1.08
-		ifTrue: [ self finishBoiling ].
-	^ theBoil
-]
-
-{ #category : #accessing }
 Kettle >> boilFor: aDuration [
-self assert: [boil  isNotNil].
-boil boilFor: aDuration
+	self assert: [ boil isNotNil ].
+	boil boilFor: aDuration
 ]
 
 { #category : #accessing }
@@ -90,13 +79,10 @@ Kettle >> clickOnCntrl: anElement [
 ]
 
 { #category : #accessing }
-Kettle >> cntrlStartBoiling: hopes1 at: duration1 and: hopes2 at: duration2 forAnother: duration in: wort [
-	self boil: hopes1 at: duration1 and: hopes2 at: duration2 forAnother: duration in: wort
-]
-
-{ #category : #accessing }
 Kettle >> finishBoiling [
-	state := 'finished'
+	state := 'finished'.
+	^ [ boil ]
+		ensure: [ boil := nil ]
 ]
 
 { #category : #accessing }
@@ -116,12 +102,6 @@ Kettle >> newEditor [
 		hExact: 100;
 		vFitContent;
 		yourself
-]
-
-{ #category : #accessing }
-Kettle >> removeBoil [
-	^ [ boil ]
-		ensure: [ boil := nil ]
 ]
 
 { #category : #accessing }

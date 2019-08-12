@@ -61,15 +61,6 @@ MashTun >> changeColor: anElement [
 ]
 
 { #category : #accessing }
-MashTun >> checkWortConsistency [
-	self
-		assert: [ wort isNotNil ]
-		and: [ wort contains: #water ]
-		and: [ wort contains: #grains ].
-	^ wort consistency
-]
-
-{ #category : #accessing }
 MashTun >> clickOnCntrl: anElement [
 	"if mashing is complete then change the color"
 	state = 'finished'
@@ -106,18 +97,6 @@ MashTun >> initialize [
 ]
 
 { #category : #accessing }
-MashTun >> mashTunOperationExample [
-	<gtExample>
-	| mashTun grains water wort |
-	mashTun := MashTun new.
-	grains := Grain new.
-	water := Water new.
-	mashTun mash: grains with: water for: 31.
-	"self decisionController."
-	^ mashTun
-]
-
-{ #category : #accessing }
 MashTun >> mashWortForDuration: aDuration [
 	self
 		assert: [ wort isNotNil ]
@@ -145,47 +124,10 @@ MashTun >> state: aString [
 ]
 
 { #category : #accessing }
-MashTun >> testExample [
-	<gtExample>
-	| dropdown |
-	dropdown := BrDropdown new.
-	^ dropdown
-		look: BrGlamorousDropdownLook;
-		layout: BlLinearLayout horizontal;
-		constraintsDo: [ :c | 
-			c horizontal fitContent.
-			c vertical fitContent ];
-		toggle: [ BrButton new
-				look: BrGlamorousButtonWithIconLook;
-				icon: BrGlamorousIcons add asElement;
-				yourself ];
-		popup: [ | editor button |
-			editor := BrEditor new
-				look: BrGlamorousRegularEditorLook new;
-				geometry: (BlRectangle cornerRadius: 4);
-				border: (BlBorder paint: BrGlamorousColors editorBorderColor width: 1);
-				hExact: 100;
-				vMatchParent;
-				padding: (BlInsets all: 3);
-				constraintsDo: [ :c | 
-					c horizontal matchParent.
-					c vertical fitContent ];
-				yourself.
-			button := BrButton new
-				look: BrGlamorousButtonWithIconLook;
-				margin: (BlInsets left: 10);
-				icon: BrGlamorousIcons accept asElement;
-				action: [ dropdown collapse.
-					];
-				yourself.
-			BlElement new
-				layout: BlLinearLayout horizontal;
-				padding: (BlInsets all: 10);
-				constraintsDo: [ :c | 
-					c horizontal fitContent.
-					c vertical fitContent ];
-				addChild: editor;
-				addChild: button;
-				yourself ];
-		yourself
+MashTun >> wortConsistency [
+	self
+		assert: [ wort isNotNil ]
+		and: [ wort contains: #water ]
+		and: [ wort contains: #grains ].
+	^ wort consistency
 ]
