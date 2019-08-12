@@ -36,28 +36,25 @@ BrewMaster >> finishMashing [
 ]
 
 { #category : #accessing }
-BrewMaster >> prepareBoiling [
-	| wort kettle theBoil hope1 hope2 duration1 duration2 remainingDuration |
+BrewMaster >> prepareBoiling: hop1 and: hop2 [
+	| wort kettle theBoil duration1 duration2 remainingDuration |
 	wort := self finishMashing.
 	kettle := self setupEquipments at: 2.
-	hope1 := Hope new.
-	hope2 := Hope new.
 	duration1 := 10.
 	duration2 := 50.
 	remainingDuration := 10.
 	^ {wort.
-	hope1.
-	hope2.
+	hop1.
+	hop2.
 	duration1.
 	duration2.
 	remainingDuration}
 ]
 
 { #category : #accessing }
-BrewMaster >> prepareFermenting [
-	| theBoil yeast fermenter duration |
+BrewMaster >> prepareFermenting: yeast [
+	| theBoil fermenter duration |
 	theBoil := self finishBoiling.
-	yeast := Yeast new.
 	fermenter := self setupEquipments at: 3.
 	duration := 7.
 	^ {theBoil.
@@ -66,11 +63,9 @@ BrewMaster >> prepareFermenting [
 ]
 
 { #category : #accessing }
-BrewMaster >> prepareMashing [
-	| mashTun grains water aDuration |
+BrewMaster >> prepareMashing: grains with: water [
+	| mashTun aDuration |
 	mashTun := self setupEquipments at: 1.
-	grains := Grain new.
-	water := Water new.
 	aDuration := 60.
 	^ {grains.
 	water.
