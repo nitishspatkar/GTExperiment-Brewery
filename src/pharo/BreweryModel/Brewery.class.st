@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'equipments',
 		'brewMaster',
-		'inventory'
+		'inventory',
+		'ingredients'
 	],
 	#category : #BreweryModel
 }
@@ -32,6 +33,18 @@ Brewery >> asInventory [
 ]
 
 { #category : #accessing }
+Brewery >> asRecipe [
+| m |
+	m := GtMondrian new.
+	m nodes
+		stencil: [ :e | e asElement ];
+		with: equipments;
+		with: ingredients.
+	m layout tree.
+	^ m
+]
+
+{ #category : #accessing }
 Brewery >> brewMaster [
 	^ brewMaster
 ]
@@ -46,6 +59,19 @@ Brewery >> createBrewery [
 	| brewery |
 	brewery := Brewery new.
 	^ brewery
+]
+
+{ #category : #accessing }
+Brewery >> createRecipe [
+	| recipe brewery |
+	brewery := self setUpEquipments.
+	recipe := recipe new.
+	recipe ingredients
+		addAll:
+			{(inventory at: 1).
+			(inventory at: 3).
+			(inventory at: 5)}.
+	ingredients:= recipe ingredients.
 ]
 
 { #category : #accessing }
@@ -69,6 +95,20 @@ Brewery >> gtLiveForInventory: aView [
 		priority: 2;
 		title: 'Inventory';
 		stencil: [ self asInventory ]
+]
+
+{ #category : #accessing }
+Brewery >> gtLiveForRevipe: aView [
+	<gtView>
+	^ aView explicit
+		priority: 3;
+		title: 'Recipe';
+		stencil: [ self asRecipe ]
+]
+
+{ #category : #accessing }
+Brewery >> ingredients [
+	^ ingredients
 ]
 
 { #category : #accessing }
