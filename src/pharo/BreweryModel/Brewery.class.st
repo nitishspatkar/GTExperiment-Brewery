@@ -152,15 +152,17 @@ Brewery >> inventory [
 { #category : #accessing }
 Brewery >> selectIngredients [
 	<gtExample>
-	| brewery |
+	| brewery water |
 	brewery := self setUpEquipments.
 	self assert: [ inventory isNotEmpty ].
+	water := Water new.
 	brewery ingredients
 		addAll:
 			{(inventory at: 1).
 			(inventory at: 3).
 			(inventory at: 4).
-			(inventory at: 5)}.
+			(inventory at: 5).
+			water}.
 	brewery inventory removeAt: 1.
 	brewery inventory removeAt: 3.
 	brewery inventory removeAt: 4.

@@ -14,7 +14,13 @@ Grain >> asElement [
 		geometry: BlCircle new;
 		background: Color transparent;
 		border: (BlBorder paint: Color black width: 1);
+		when: BlClickEvent do:[ self cntrlAddGrains: self];
 		yourself
+]
+
+{ #category : #accessing }
+Grain >> cntrlAddGrains: grains [
+	self inform: grains color asString
 ]
 
 { #category : #accessing }
