@@ -54,7 +54,6 @@ MashTun >> cntrlStartMashing: duration [
 { #category : #accessing }
 MashTun >> finishMashing [
 	| wortConsistency |
-	self inform: 'finish mashing'.
 	state:= 'finished'.
 	^ [ wort ]
 		ensure: [ wort := nil ]
@@ -84,7 +83,6 @@ MashTun >> mashWortForDuration: aDuration [
 		and: [ wort contains: #grains ]."
 
 	(aDuration / 10) seconds wait.
-	self inform: 'Mashing for seconds'.
 	self wortConsistency: aDuration
 ]
 
@@ -118,18 +116,17 @@ MashTun >> state: aString [
 
 { #category : #accessing }
 MashTun >> wortConsistency [
-	self inform: 'consistency'.
 	"self
 		assert: [ wort isNotNil ]
 		and: [ wort contains: #water ]
 		and: [ wort contains: #grains ]."
+
 	^ wort consistency
 ]
 
 { #category : #accessing }
 MashTun >> wortConsistency: aDuration [
 	| wortConsistency |
-	self inform: 'consistency'.
 	"self
 		assert: [ wort isNotNil ]
 		and: [ wort contains: #water ]
@@ -137,5 +134,4 @@ MashTun >> wortConsistency: aDuration [
 	wortConsistency := wort checkConsistency: aDuration.
 	wortConsistency = 5
 		ifTrue: [ self finishMashing ].
-	^ wortConsistency
 ]

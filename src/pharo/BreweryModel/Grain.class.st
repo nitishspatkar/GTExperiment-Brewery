@@ -47,8 +47,3 @@ Grain >> gtLiveFor: aView [
 Grain >> initialize [
 	super initialize
 ]
-
-{ #category : #accessing }
-Grain >> initialize: brewery [
-	super initialize
-]

@@ -8,11 +8,20 @@ Class {
 }
 
 { #category : #accessing }
+Wort >> addGrains: grains [
+	^ grains
+]
+
+{ #category : #accessing }
+Wort >> addWater: water [
+	^ water
+]
+
+{ #category : #accessing }
 Wort >> checkConsistency: aDuration [
 	aDuration > 30
 		ifTrue: [ consistency := 5 ]
 		ifFalse: [ consistency := 2 ].
-	self inform: consistency asString.
 	^ consistency
 ]
 
