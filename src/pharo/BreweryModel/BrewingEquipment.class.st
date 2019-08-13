@@ -2,10 +2,16 @@ Class {
 	#name : #BrewingEquipment,
 	#superclass : #Object,
 	#instVars : [
-		'capacity'
+		'capacity',
+		'ingredients'
 	],
 	#category : #BreweryModel
 }
+
+{ #category : #accessing }
+BrewingEquipment >> addIngredients: aListOfIngredients [
+	ingredients := aListOfIngredients
+]
 
 { #category : #accessing }
 BrewingEquipment >> asElement [
@@ -29,4 +35,14 @@ BrewingEquipment >> cntrlGetCapacity [
 		ifTrue: [ ^ 360 @ 100 ].
 	capacity = 50
 		ifTrue: [ ^ 700 @ 200 ]
+]
+
+{ #category : #accessing }
+BrewingEquipment >> ingredients [
+	^ ingredients
+]
+
+{ #category : #accessing }
+BrewingEquipment >> initialize [
+	ingredients := OrderedCollection new
 ]

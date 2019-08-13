@@ -76,12 +76,13 @@ MashTun >> initialize [
 ]
 
 { #category : #accessing }
-MashTun >> mashWortForDuration: aDuration [
+MashTun >> mashWortFor: aDuration [
 	"self
 		assert: [ wort isNotNil ]
 		and: [ wort contains: #water ]
 		and: [ wort contains: #grains ]."
 
+	self ingredients.
 	(aDuration / 10) seconds wait.
 	self wortConsistency: aDuration
 ]

@@ -8,6 +8,11 @@ Class {
 }
 
 { #category : #accessing }
+BrewMaster >> add: ingredients to: equipments [
+
+]
+
+{ #category : #accessing }
 BrewMaster >> addWater: water [
 	| mashTun |
 	mashTun := currentProject equipments at: 1.
