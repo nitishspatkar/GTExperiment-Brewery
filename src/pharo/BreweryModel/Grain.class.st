@@ -42,3 +42,13 @@ Grain >> gtLiveFor: aView [
 		title: 'Grain';
 		stencil: [ self asElement ]
 ]
+
+{ #category : #accessing }
+Grain >> initialize [
+	super initialize
+]
+
+{ #category : #accessing }
+Grain >> initialize: brewery [
+	super initialize
+]

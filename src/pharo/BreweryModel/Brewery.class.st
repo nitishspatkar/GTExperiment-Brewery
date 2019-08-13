@@ -55,22 +55,6 @@ Brewery >> brewMaster: master [
 ]
 
 { #category : #accessing }
-Brewery >> createBrewery [
-	| brewery |
-	brewery := Brewery new.
-	^ brewery
-]
-
-{ #category : #accessing }
-Brewery >> createRecipe [
-	<gtExample>
-	| recipe brewery |
-	brewery := self setUpEquipments.
-	
-	^ brewery
-]
-
-{ #category : #accessing }
 Brewery >> equipments [
 	^ equipments
 ]
@@ -115,12 +99,14 @@ Brewery >> initialize [
 	inventory := OrderedCollection new.
 	ingredients:= OrderedCollection new.
 	
-	malt1 := MunichMalt new quantity: 2.
-	malt2 := ViennaMalt new quantity: 1.
-	hops1 := MagnumHop new quantity: 2.
-	hops2 := ChinookHop new quantity: 1.
-	yeast1 := CoopersYeast new quantity: 2.
-	yeast2 := FermentisYeast new quantity: 1.
+	malt1 := MunichMalt new.
+	malt2 := ViennaMalt new.
+	
+	hops1 := MagnumHop new.
+	hops2 := ChinookHop new.
+	
+	yeast1 := CoopersYeast new.
+	yeast2 := FermentisYeast new.
 	mashTun1 := MashTun new capacity: 20.
 	mashTun2 := MashTun new capacity: 50.
 	kettle1 := Kettle new capacity: 20.
@@ -147,41 +133,4 @@ Brewery >> initialize [
 { #category : #accessing }
 Brewery >> inventory [
 	^ inventory
-]
-
-{ #category : #accessing }
-Brewery >> selectIngredients [
-	<gtExample>
-	| brewery water |
-	brewery := self setUpEquipments.
-	self assert: [ inventory isNotEmpty ].
-	water := Water new.
-	brewery ingredients
-		addAll:
-			{(inventory at: 1).
-			(inventory at: 3).
-			(inventory at: 4).
-			(inventory at: 5).
-			water}.
-	brewery inventory removeAt: 1.
-	brewery inventory removeAt: 3.
-	brewery inventory removeAt: 4.
-	brewery inventory removeAt: 5.
-	^ brewery
-]
-
-{ #category : #accessing }
-Brewery >> setUpEquipments [
-	<gtExample>
-	| brewery mashTun kettle fermenter |
-	brewery := self createBrewery.
-	mashTun := inventory at: 7.
-	kettle := inventory at: 9.
-	fermenter := inventory at: 11.
-	brewery equipments
-		addAll:
-			{mashTun.
-			kettle.
-			fermenter}.
-	^ brewery
 ]

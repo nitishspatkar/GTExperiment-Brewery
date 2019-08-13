@@ -40,17 +40,17 @@ MashTun >> asElement [
 		size: calculatedSize;
 		background: Color blue veryMuchLighter;
 		border: (BlBorder paint: Color blue muchLighter width: 1);
-		"addChild: editor1;
-		addChild: editor2;"
+		"addChild: editor1;"
+		addChild: editor2;
 		addChild:
 			(BrButton new
 				look: BrGlamorousButtonWithLabelLook;
 				label: 'Start mashing';
-				action: [ | duration grainType|
-					grainType := editor1 text asString .
+				action: [ | duration grains|
+					"grainType := editor1 text asString."
 					duration := editor2 text asString asNumber.
 					[ (duration / 10) seconds wait.
-					self cntrlStartMashing: grainType for: duration.
+					self cntrlStartMashing: grains for: duration.
 					self clickOnCntrl: anElement ] fork ]).
 	^ anElement
 ]
