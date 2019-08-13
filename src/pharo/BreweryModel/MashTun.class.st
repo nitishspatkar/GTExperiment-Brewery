@@ -3,55 +3,32 @@ Class {
 	#superclass : #BrewingEquipment,
 	#instVars : [
 		'state',
-		'wort'
+		'wort',
+		'mashingDuration'
 	],
 	#category : #BreweryModel
 }
 
 { #category : #accessing }
-MashTun >> addGrains: grainType [
-	self assert: [ wort isNotNil ] and: [ wort contains: #water ].
-	wort addGrains: grainType
-]
-
-{ #category : #accessing }
-MashTun >> addWater: water [
-	self assert: [ wort isNil ].
-	wort := Wort new.
-	wort addWater: water
-]
-
-{ #category : #accessing }
-MashTun >> addWater: water ofVolume: aVolume [
-	self assert: [ wort isNil ].
-	wort := Wort new.
-	wort addWater: water ofVolume: aVolume
-]
-
-{ #category : #accessing }
 MashTun >> asElement [
 	<gtExample>
-	| anElement editor1 editor2 calculatedSize|
-	calculatedSize:= self cntrlGetCapacity.
-	editor1 := self newEditor text: 'Enter grain type'.
-	editor2 := self newEditor text: 'Enter duration in minutes'.
+	| anElement editor1 calculatedSize |
+	calculatedSize := self cntrlGetCapacity.
+	editor1 := self newEditor text: 'Enter duration in minutes'.
 	anElement := super asElement
 		layout: BlLinearLayout horizontal;
 		size: calculatedSize;
 		background: Color blue veryMuchLighter;
 		border: (BlBorder paint: Color blue muchLighter width: 1);
-		"addChild: editor1;"
-		addChild: editor2;
+		addChild: editor1;
 		addChild:
 			(BrButton new
 				look: BrGlamorousButtonWithLabelLook;
 				label: 'Start mashing';
-				action: [ | duration grains|
-					"grainType := editor1 text asString."
-					duration := editor2 text asString asNumber.
-					[ (duration / 10) seconds wait.
-					self cntrlStartMashing: grains for: duration.
-					self clickOnCntrl: anElement ] fork ]).
+				action: [ | duration |
+					duration := editor1 text asString asNumber.
+					self cntrlStartMashing: duration.
+					self clickOnCntrl: anElement ]).
 	^ anElement
 ]
 
@@ -70,13 +47,17 @@ MashTun >> clickOnCntrl: anElement [
 ]
 
 { #category : #accessing }
-MashTun >> cntrlStartMashing: grainType for: aNumber [
-	self mash: grainType with: 'water' for: aNumber
+MashTun >> cntrlStartMashing: duration [
+	self mashWortForDuration: duration
 ]
 
 { #category : #accessing }
 MashTun >> finishMashing [
-	state := 'finished'.
+	| wortConsistency |
+	self inform: 'finish mashing'.
+	wortConsistency := self wortConsistency.
+	wortConsistency = 5
+		ifTrue: [ state := 'finished' ].
 	^ [ wort ]
 		ensure: [ wort := nil ]
 ]
@@ -98,11 +79,24 @@ MashTun >> initialize [
 
 { #category : #accessing }
 MashTun >> mashWortForDuration: aDuration [
-	self
+	"self
 		assert: [ wort isNotNil ]
 		and: [ wort contains: #water ]
-		and: [ wort contains: #grains ] wort
-		mashWortForDuration: aDuration
+		and: [ wort contains: #grains ]."
+
+	(aDuration / 10) seconds wait.
+	self inform: 'Mashing for seconds'.
+	self wortConsistency
+]
+
+{ #category : #accessing }
+MashTun >> mashingDuraion [
+	^ mashingDuration
+]
+
+{ #category : #accessing }
+MashTun >> mashingDuraion: aNumber [
+	mashingDuration := aNumber
 ]
 
 { #category : #accessing }
@@ -125,9 +119,10 @@ MashTun >> state: aString [
 
 { #category : #accessing }
 MashTun >> wortConsistency [
-	self
+	self inform: 'consistency'.
+	"self
 		assert: [ wort isNotNil ]
 		and: [ wort contains: #water ]
-		and: [ wort contains: #grains ].
+		and: [ wort contains: #grains ]."
 	^ wort consistency
 ]

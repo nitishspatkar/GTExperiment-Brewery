@@ -8,13 +8,21 @@ Class {
 }
 
 { #category : #accessing }
-BrewMaster >> add: grains [
+BrewMaster >> addGrains: grains [
 	| mashTun |
 	mashTun := currentProject equipments at: 1.
 	self
 		assert: [ mashTun wort isNotNil ]
 		and: [ mashTun wort contains: #water ].
 	mashTun wort addGrains: grains
+]
+
+{ #category : #accessing }
+BrewMaster >> addWater: water [
+	| mashTun |
+	mashTun := currentProject equipments at: 1.
+	self assert: [ mashTun wort isNil ].
+	mashTun wort addWater: water
 ]
 
 { #category : #accessing }
@@ -54,6 +62,13 @@ BrewMaster >> selectIngredients [
 ]
 
 { #category : #accessing }
+BrewMaster >> setMashingDuration: aNumber [
+	| mashTun |
+	mashTun := currentProject equipments at: 1.
+	mashTun mashInDuration: aNumber
+]
+
+{ #category : #accessing }
 BrewMaster >> setUpEquipments [
 	<gtExample>
 	| brewery mashTun kettle fermenter |
@@ -68,4 +83,14 @@ BrewMaster >> setUpEquipments [
 			kettle.
 			fermenter}.
 	^ brewery
+]
+
+{ #category : #accessing }
+BrewMaster >> startMashing [
+	| mashTun wortConsistency |
+	mashTun := currentProject equipments at: 1.
+	self
+		assert: [ mashTun wort isNotNil ]
+		and: [ mashTun mashingDuraion isNotNil ].
+	mashTun startMashing.
 ]
