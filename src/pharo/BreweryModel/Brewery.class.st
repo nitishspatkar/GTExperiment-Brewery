@@ -3,7 +3,6 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'equipments',
-		'brewMaster',
 		'inventory',
 		'ingredients'
 	],
@@ -93,12 +92,12 @@ Brewery >> ingredients [
 
 { #category : #accessing }
 Brewery >> initialize [
-	| malt1 malt2 hops1 hops2 yeast1 yeast2 mashTun1 mashTun2 kettle1 kettle2 fermenter1 fermenter2 |
+	|malt1 malt2 hops1 hops2 yeast1 yeast2 mashTun1 mashTun2 kettle1 kettle2 fermenter1 fermenter2 |
 	super initialize.
 	equipments := OrderedCollection new.
 	inventory := OrderedCollection new.
 	ingredients:= OrderedCollection new.
-	
+
 	malt1 := MunichMalt new.
 	malt2 := ViennaMalt new.
 	
