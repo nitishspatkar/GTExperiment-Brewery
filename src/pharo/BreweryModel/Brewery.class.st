@@ -44,11 +44,6 @@ Brewery >> asRecipe [
 ]
 
 { #category : #accessing }
-Brewery >> brewMaster [
-	^ brewMaster
-]
-
-{ #category : #accessing }
 Brewery >> brewMaster: master [
 	brewMaster := master
 ]
@@ -77,7 +72,7 @@ Brewery >> gtLiveForInventory: aView [
 ]
 
 { #category : #accessing }
-Brewery >> gtLiveForRevipe: aView [
+Brewery >> gtLiveForRecipe: aView [
 	<gtView>
 	^ aView explicit
 		priority: 3;
