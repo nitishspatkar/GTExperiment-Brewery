@@ -28,7 +28,7 @@ MashTun >> asElement [
 				action: [ | duration |
 					duration := editor1 text asString asNumber.
 					self cntrlStartMashing: duration.
-					self clickOnCntrl: anElement ]).
+					self cntrlCheckStatus: anElement ]).
 	^ anElement
 ]
 

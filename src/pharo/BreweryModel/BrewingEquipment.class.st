@@ -9,8 +9,8 @@ Class {
 }
 
 { #category : #accessing }
-BrewingEquipment >> addIngredients: aListOfIngredients [
-	ingredients := aListOfIngredients
+BrewingEquipment >> addIngredients: anIngredient [
+	ingredients add: anIngredient
 ]
 
 { #category : #accessing }

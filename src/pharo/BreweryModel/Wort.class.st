@@ -18,6 +18,17 @@ Wort >> addWater: water [
 ]
 
 { #category : #accessing }
+Wort >> asElement [
+<gtExample>
+	^ BlElement new
+		geometry: BlRectangle new;
+		size: 100 @ 50;
+		background: Color brown darker;
+		border: (BlBorder paint: Color black width: 1);
+		yourself
+]
+
+{ #category : #accessing }
 Wort >> checkConsistency: aDuration [
 	aDuration > 30
 		ifTrue: [ consistency := 5 ]
