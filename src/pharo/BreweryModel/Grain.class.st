@@ -8,24 +8,12 @@ Class {
 }
 
 { #category : #accessing }
-Grain >> asDragElement [
-<gtExample>
-	^ BlElement new
-		geometry: BlCircle new;
-		background: Color transparent;
-		border: (BlBorder paint: Color black width: 1);
-		when: BlDragEndEvent do:[ self cntrlAddGrains: self];
-		yourself
-]
-
-{ #category : #accessing }
 Grain >> asElement [
 <gtExample>
 	^ BlElement new
 		geometry: BlCircle new;
 		background: Color transparent;
 		border: (BlBorder paint: Color black width: 1);
-		when: BlClickEvent do:[ self cntrlAddGrains: self];
 		yourself
 ]
 

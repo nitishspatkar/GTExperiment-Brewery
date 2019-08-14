@@ -40,9 +40,11 @@ MashTun >> changeColor: anElement [
 { #category : #accessing }
 MashTun >> cntrlCheckStatus: anElement [
 	"if mashing is complete then change the color"
+
 	state = 'finished'
-		ifTrue: [ self changeColor: anElement ]
-		ifFalse: [self inform: 'Not enough consistency'].
+		ifTrue: [ ingredients = nil.
+			self changeColor: anElement ]
+		ifFalse: [ self inform: 'Not enough consistency' ].
 	^ anElement
 ]
 
@@ -54,9 +56,8 @@ MashTun >> cntrlStartMashing: duration [
 { #category : #accessing }
 MashTun >> finishMashing [
 	| wortConsistency |
-	state:= 'finished'.
-	^ [ wort ]
-		ensure: [ wort := nil ]
+	state := 'finished'.
+	^ wort
 ]
 
 { #category : #accessing }
@@ -82,7 +83,7 @@ MashTun >> mashWortFor: aDuration [
 		and: [ wort contains: #water ]
 		and: [ wort contains: #grains ]."
 
-	ingredients = nil.
+	self ingredients removeAll.
 	(aDuration / 10) seconds wait.
 	self wortConsistency: aDuration
 ]

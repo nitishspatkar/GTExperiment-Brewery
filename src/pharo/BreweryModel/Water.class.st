@@ -19,11 +19,6 @@ Water >> asElement [
 ]
 
 { #category : #accessing }
-Water >> cntrlAddWater: water [
-	self inform: water asString
-]
-
-{ #category : #accessing }
 Water >> density [
 ^ density
 ]
