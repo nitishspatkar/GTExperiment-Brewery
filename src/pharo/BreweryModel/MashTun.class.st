@@ -48,7 +48,7 @@ MashTun >> clickOnCntrl: anElement [
 
 { #category : #accessing }
 MashTun >> cntrlStartMashing: duration [
-	self mashWortForDuration: duration
+	self mashWortFor: duration
 ]
 
 { #category : #accessing }
