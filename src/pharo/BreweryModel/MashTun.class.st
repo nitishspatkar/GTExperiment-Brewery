@@ -38,7 +38,7 @@ MashTun >> changeColor: anElement [
 ]
 
 { #category : #accessing }
-MashTun >> clickOnCntrl: anElement [
+MashTun >> cntrlCheckStatus: anElement [
 	"if mashing is complete then change the color"
 	state = 'finished'
 		ifTrue: [ self changeColor: anElement ]
@@ -82,7 +82,7 @@ MashTun >> mashWortFor: aDuration [
 		and: [ wort contains: #water ]
 		and: [ wort contains: #grains ]."
 
-	self ingredients.
+	ingredients = nil.
 	(aDuration / 10) seconds wait.
 	self wortConsistency: aDuration
 ]
