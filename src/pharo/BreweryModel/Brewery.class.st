@@ -33,11 +33,40 @@ Brewery >> asInventory [
 
 { #category : #accessing }
 Brewery >> asRecipe [
-| m |
+	| m dropTarget equipment |
+	dropTarget := nil.
 	m := GtMondrian new.
 	m nodes
-		stencil: [ :e | e asElement ];
-		with: equipments;
+		stencil: [ :e | 
+			| element |
+			element := e asElement.
+			element
+				addEventHandlerOn: BlClickEvent
+					do: [ :f | 
+					element == f target
+						ifTrue: [ dropTarget
+								ifNotNil: [ dropTarget border: (BlBorder paint: Color blue asBlPaint width: 5) ].
+							dropTarget == f target
+								ifTrue: [ dropTarget := nil.
+									equipment := nil ]
+								ifFalse: [ dropTarget := f target.
+									equipment := e.
+									dropTarget
+										border: (BlBorder paint: Color red asBlPaint width: 5) ] ] ];
+				yourself ];
+		with: equipments.
+	m nodes
+		stencil: [ :e | 
+			| element |
+			element := e asElement.
+			element
+				addEventHandlerOn: BlClickEvent
+					do: [ :f | 
+					(element == f target and: [ dropTarget isNotNil ])
+						ifTrue: [ element removeFromParent.
+							dropTarget addChild: element.
+							equipment addIngredients: {e} ] ];
+				yourself ];
 		with: ingredients.
 	m layout tree.
 	^ m
