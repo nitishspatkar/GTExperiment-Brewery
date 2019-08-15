@@ -50,7 +50,7 @@ Kettle >> asElement [
 					duration1 := editor1 text asString asNumber.
 					duration2 := editor2 text asString asNumber.
 					remainignDuration := editor3 text asString asNumber.
-					finalDuration = duration1 + (duration2 -duration1) + remainignDuration.
+					finalDuration = duration1 + (duration2 - duration1) + remainignDuration.
 					[ (finalDuration / 10) seconds wait.
 					self cntrlStartBoiling: finalDuration.
 					self cntrlCheckStatus: anElement ] fork ]).
@@ -62,11 +62,6 @@ Kettle >> boilHopsFor: aDuration [
 	self ingredients removeAll.
 	(aDuration / 10) seconds wait.
 	self checkBoilTOG: aDuration
-]
-
-{ #category : #accessing }
-Kettle >> changeColor: anElement [
-	anElement background: Color brown.
 ]
 
 { #category : #accessing }
@@ -83,7 +78,7 @@ Kettle >> cntrlCheckStatus: anElement [
 
 	state = 'finished'
 		ifTrue: [ ingredients = nil.
-			self changeColor: anElement ]
+			self removeIngredientsFromKettleUI: anElement ]
 		ifFalse: [ self inform: 'Not enough TOG' ].
 	^ anElement
 ]
@@ -121,6 +116,22 @@ Kettle >> newEditor [
 		hExact: 100;
 		vFitContent;
 		yourself
+]
+
+{ #category : #accessing }
+Kettle >> removeIngredientsFromKettleUI: anElement [
+	"remove ingredients and replace with wort- UI specific"
+
+	anElement removeChildAt: 5.
+	anElement removeChildAt: 5.
+	anElement
+		addChild:
+			(BlElement new
+				geometry: BlRectangle new;
+				size: 100 @ 50;
+				background: Color brown darker;
+				border: (BlBorder paint: Color black width: 1);
+				yourself)
 ]
 
 { #category : #accessing }

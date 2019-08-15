@@ -33,28 +33,12 @@ MashTun >> asElement [
 ]
 
 { #category : #accessing }
-MashTun >> changeColor: anElement [
-	"remove ingredients and replace with wort- UI specific"
-
-	anElement removeChildAt: 3.
-	anElement removeChildAt: 3.
-	anElement
-		addChild:
-			(BlElement new
-				geometry: BlRectangle new;
-				size: 100 @ 50;
-				background: Color brown darker;
-				border: (BlBorder paint: Color black width: 1);
-				yourself)
-]
-
-{ #category : #accessing }
 MashTun >> cntrlCheckStatus: anElement [
 	"if mashing is complete then change the color"
 
 	state = 'finished'
 		ifTrue: [ ingredients = nil.
-			self changeColor: anElement ]
+			self removeIngredientsFromMashUI: anElement ]
 		ifFalse: [ self inform: 'Not enough consistency' ].
 	^ anElement
 ]
@@ -119,6 +103,22 @@ MashTun >> newEditor [
 		hExact: 100;
 		vFitContent;
 		yourself
+]
+
+{ #category : #accessing }
+MashTun >> removeIngredientsFromMashUI: anElement [
+	"remove ingredients and replace with wort- UI specific"
+
+	anElement removeChildAt: 3.
+	anElement removeChildAt: 3.
+	anElement
+		addChild:
+			(BlElement new
+				geometry: BlRectangle new;
+				size: 100 @ 50;
+				background: Color brown darker;
+				border: (BlBorder paint: Color black width: 1);
+				yourself)
 ]
 
 { #category : #accessing }
