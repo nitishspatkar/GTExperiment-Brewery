@@ -66,7 +66,6 @@ MashTun >> cntrlStartMashing: duration [
 
 { #category : #accessing }
 MashTun >> finishMashing [
-	| wortConsistency |
 	state := 'finished'.
 	^ wort
 ]
