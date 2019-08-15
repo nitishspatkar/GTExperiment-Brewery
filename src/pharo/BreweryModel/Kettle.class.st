@@ -14,22 +14,9 @@ Kettle >> TOG [
 ]
 
 { #category : #accessing }
-Kettle >> addHops: someHops [
-	self assert: [ boil isNotNil ].
-	boil addHops: someHops
-]
-
-{ #category : #accessing }
-Kettle >> addWort: aWort [
-	self assert: [ boil isNil and: [ state = #start ] ].
-	boil := TheBoil new.
-	boil addWort: aWort
-]
-
-{ #category : #accessing }
 Kettle >> asElement [
 	<gtExample>
-	| anElement editor1 editor2 editor3 calculatedSize|
+	| anElement editor1 editor2 editor3 calculatedSize |
 	calculatedSize := self cntrlGetCapacity.
 	editor1 := self newEditor text: 'Enter at duration'.
 	editor2 := self newEditor text: 'Enter at duration'.
@@ -46,14 +33,13 @@ Kettle >> asElement [
 			(BrButton new
 				look: BrGlamorousButtonWithLabelLook;
 				label: 'Start boiling';
-				action: [ | duration1 duration2 remainignDuration finalDuration|
+				action: [ | duration1 duration2 remainignDuration finalDuration |
 					duration1 := editor1 text asString asNumber.
 					duration2 := editor2 text asString asNumber.
 					remainignDuration := editor3 text asString asNumber.
-					finalDuration = duration1 + (duration2 - duration1) + remainignDuration.
-					[ (finalDuration / 10) seconds wait.
+					finalDuration := duration1 + duration2 + remainignDuration.
 					self cntrlStartBoiling: finalDuration.
-					self cntrlCheckStatus: anElement ] fork ]).
+					self cntrlCheckStatus: anElement ]).
 	^ anElement
 ]
 
@@ -102,7 +88,8 @@ Kettle >> finishBoiling [
 { #category : #accessing }
 Kettle >> initialize [
 	super initialize.
-	state := 'start'
+	state := 'start'.
+	boil := TheBoil new
 ]
 
 { #category : #accessing }
