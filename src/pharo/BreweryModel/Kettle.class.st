@@ -52,19 +52,13 @@ Kettle >> asElement [
 					remainignDuration := editor3 text asString asNumber.
 					finalDuration = duration1 + (duration2 -duration1) + remainignDuration.
 					[ (finalDuration / 10) seconds wait.
-					self cntrlStartBoiling: finalDuration
-					self clickOnCntrl: anElement ] fork ]).
+					self cntrlStartBoiling: finalDuration.
+					self cntrlCheckStatus: anElement ] fork ]).
 	^ anElement
 ]
 
 { #category : #accessing }
-Kettle >> boilFor: aDuration [
-	self assert: [ boil isNotNil ].
-	boil boilFor: aDuration
-]
-
-{ #category : #accessing }
-Kettle >> boilHopesFor: aDuration [
+Kettle >> boilHopsFor: aDuration [
 	self ingredients removeAll.
 	(aDuration / 10) seconds wait.
 	self checkBoilTOG: aDuration
@@ -78,24 +72,30 @@ Kettle >> changeColor: anElement [
 { #category : #accessing }
 Kettle >> checkBoilTOG: aDuration [
 	| boilTOG |
-	boilTOG := boil
-		checkTOG: aDuration boilTOG = 1.08
+	boilTOG := boil checkTOG: aDuration.
+	boilTOG = 1.08
 		ifTrue: [ self finishBoiling ]
 ]
 
 { #category : #accessing }
-Kettle >> clickOnCntrl: anElement [
+Kettle >> cntrlCheckStatus: anElement [
 	"if boiling is complete then change the color"
 
 	state = 'finished'
-		ifTrue: [ self changeColor: anElement ]
-		ifFalse: [ self inform: 'Too high TOG' ].
+		ifTrue: [ ingredients = nil.
+			self changeColor: anElement ]
+		ifFalse: [ self inform: 'Not enough TOG' ].
 	^ anElement
 ]
 
 { #category : #accessing }
 Kettle >> cntrlStartBoiling [
 	self inform: 'OK'
+]
+
+{ #category : #accessing }
+Kettle >> cntrlStartBoiling: aDuration [
+	self boilHopsFor: aDuration
 ]
 
 { #category : #accessing }
