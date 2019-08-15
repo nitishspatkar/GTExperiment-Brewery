@@ -14,7 +14,6 @@ Water >> asElement [
 		geometry: BlRectangle new;
 		background: Color lightBlue;
 		border: (BlBorder paint: Color black width: 1);
-		when: BlClickEvent do:[ self cntrlAddWater: self];
 		yourself
 ]
 

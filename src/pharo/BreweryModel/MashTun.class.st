@@ -34,7 +34,18 @@ MashTun >> asElement [
 
 { #category : #accessing }
 MashTun >> changeColor: anElement [
-	anElement background: Color blue.
+	"remove ingredients and replace with wort- UI specific"
+
+	anElement removeChildAt: 3.
+	anElement removeChildAt: 3.
+	anElement
+		addChild:
+			(BlElement new
+				geometry: BlRectangle new;
+				size: 100 @ 50;
+				background: Color brown darker;
+				border: (BlBorder paint: Color black width: 1);
+				yourself)
 ]
 
 { #category : #accessing }
