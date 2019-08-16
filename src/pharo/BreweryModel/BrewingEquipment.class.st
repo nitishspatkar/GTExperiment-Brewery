@@ -32,9 +32,9 @@ BrewingEquipment >> capacity: aNumber [
 { #category : #accessing }
 BrewingEquipment >> cntrlGetCapacity [
 	capacity = 20
-		ifTrue: [ ^ 700 @ 200 ].
+		ifTrue: [ ^ 500 @ 200 ].
 	capacity = 50
-		ifTrue: [ ^ 1400 @ 400 ]
+		ifTrue: [ ^ 1200 @ 400 ]
 ]
 
 { #category : #accessing }

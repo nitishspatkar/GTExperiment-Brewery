@@ -65,10 +65,7 @@ Brewery >> asRecipe [
 					(element == f target and: [ dropTarget isNotNil ])
 						ifTrue: [ element removeFromParent.
 							dropTarget addChild: element.
-							equipment addIngredients: {e}.
-							"After finishing process inside equipment if ingredients are nil then remove it from UI"
-							equipment ingredients isEmpty
-								ifTrue: [ self inform: 'remove from UI' ] ] ];
+							equipment addIngredients: {e} ] ];
 				yourself ];
 		with: ingredients.
 	m layout tree.
